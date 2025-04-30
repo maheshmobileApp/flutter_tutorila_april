@@ -12,7 +12,6 @@ Rules for naming variables in Dart:
   keywords cannot be used as variable names
   blank spaces are not allowed in variable name 
   special characters are not allowed in variable names , except underscore(_) and dollar sign($)
-
  */
 
 // var a = 10;
