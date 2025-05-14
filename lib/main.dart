@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'splash.dart';
 import 'row_and_column.dart';
+import 'welcome_screen.dart';
 void main() {
   // Entry point of the application
   runApp(MyApp()); // pass the widget to the runApp method
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RowAndColumn()
+      home: WelcomeScreen()
     );
   }
 }
