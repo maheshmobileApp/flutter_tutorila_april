@@ -43,6 +43,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
             TextButton(onPressed: (){
               print("button pressed");
+              Navigator.pushNamed(context, "/login");
             }, child: Container(
               width: double.infinity,
               height: 45,
@@ -63,7 +64,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       fontSize: 16,
                       fontWeight: FontWeight.w600,color: Color(0xFF5B67CA),
                       )),onPressed: (){
-                    print("Sign up button pressed");
+                                  Navigator.pushNamed(context, "/signup");
+
                   },)       
           ],
         ),
