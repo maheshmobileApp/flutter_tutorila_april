@@ -43,7 +43,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
             TextButton(onPressed: (){
               print("button pressed");
-              Navigator.pushNamed(context, "/login");
+              // Navigator.pop(context)/
+               Navigator.pushNamed(context, "/login");
+              // if (Navigator.canPop(context)) {
+              //   Navigator.pop(context);
+              // }
             }, child: Container(
               width: double.infinity,
               height: 45,
