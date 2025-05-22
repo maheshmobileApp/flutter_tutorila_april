@@ -3,6 +3,8 @@ import 'package:flutter_tutorial_april/welcome_screen.dart';
 import 'splash.dart';
 import 'login_screen.dart';
 import 'sign_up_screen.dart';
+import 'home_screen.dart';
+import 'listview/listview.dart';
 void main() {
   // Entry point of the application
   runApp(MyApp()); // pass the widget to the runApp method
@@ -14,12 +16,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: "/welocme",
+      initialRoute: "/listview",
       routes: {
         "/splash":(context) => SplashScreen(),
         "/login":(context) => LoginScreen(),
         "/signup":(context) => SignUpScreen(),
         "/welocme":(context) => WelcomeScreen(),
+        "/home": (context) => HomeScreen(),
+        "/listview": (context) => ListviewScreen(),
       },
     );
   }

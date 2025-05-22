@@ -12,6 +12,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool isInvisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,125 +27,325 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Form(
           key: _formKey,
           autovalidateMode: AutovalidateMode.always,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF5B67CA)),
-                  )),
-              SizedBox(
-                height: 30,
-              ),
-              TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  } else if (isValidEmail(value)) {
-                    return null;
-                  } else {
-                    return 'Please enter a valid email';
-                  }
-                },
-                inputFormatters: [
-                  //  FilteringTextInputFormatter.digitsOnly,
-                  // FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
-                  // LengthLimitingTextInputFormatter(20),
-                ],
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                // maxLength: 120,
-                // maxLines: 5,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.red,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(height: 100,),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF5B67CA)),
+                    )),
+                SizedBox(
+                  height: 30,
                 ),
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.email),
-                    border: OutlineInputBorder(),
-                    // labelText: "Email",
-                    hintText: "Enter your email",
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email';
+                    } else if (isValidEmail(value)) {
+                      return null;
+                    } else {
+                      return 'Please enter a valid email';
+                    }
+                  },
+                  inputFormatters: [
+                    //  FilteringTextInputFormatter.digitsOnly,
+                    // FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                    // LengthLimitingTextInputFormatter(20),
+                  ],
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  // maxLength: 120,
+                  // maxLines: 5,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.red,
+                  ),
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.email),
+                      border: OutlineInputBorder(),
+                      // labelText: "Email",
+                      hintText: "Enter your email",
+                      hintStyle: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF2C406E),
+                      )),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    } else if (isValidPassword(value)) {
+                      return null;
+                    } else {
+                      return 'Please enter a valid password';
+                    }
+                    
+                  },
+                  controller: passwordController,
+                  // onChanged: (value) {
+                  //   print(value);
+                  //
+                  decoration: InputDecoration(
+                    hintText: "Enter your password",
+                    prefixIcon: Icon(Icons.password),
+                    suffixIcon: InkWell(
+                        onTap: () {
+                          if (isInvisible) {
+                            setState(() {
+                              isInvisible = false;
+                            });
+                          } else {
+                            setState(() {
+                              isInvisible = true;
+                            });
+                          }
+                          print(isInvisible);
+            
+                          // isInvisible = !isInvisible;
+                        },
+                        child: isInvisible == true
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility)),
                     hintStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: Color(0xFF2C406E),
-                    )),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  } else if (isValidPassword(value)) {
-                    return null;
-                  } else {
-                    return 'Please enter a valid password';
-                  }
-                  
-                },
-                controller: passwordController,
-                // onChanged: (value) {
-                //   print(value);
-                //
-                decoration: InputDecoration(
-                  hintText: "Enter your password",
-                  prefixIcon: Icon(Icons.password),
-                  suffixIcon: Icon(Icons.visibility_off),
-                  hintStyle: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF2C406E),
+                    ),
+                    border: OutlineInputBorder(),
                   ),
-                  border: OutlineInputBorder(),
+                  obscureText: isInvisible,
+                  // readOnly: true,
                 ),
-                obscureText: true,
-                // readOnly: true,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text("Forgot Password?",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xFF5B67CA))))),
-              ),
-              TextButton(
-                  onPressed: () {
-                    loginAction();
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    } else if (isValidPassword(value)) {
+                      return null;
+                    } else {
+                      return 'Please enter a valid password';
+                    }
                   },
-                  child: Container(
-                      width: double.infinity,
-                      height: 45,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Color(0xFF5B67CA),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
-                      ))),
-              SizedBox(
-                height: 20,
-              ),
-              dividerWidget(),
-              dontHaveAccountWidget()
-            ],
+                  controller: passwordController,
+                  // onChanged: (value) {
+                  //   print(value);
+                  //
+                  decoration: InputDecoration(
+                    hintText: "Enter your password",
+                    prefixIcon: Icon(Icons.password),
+                    suffixIcon: InkWell(
+                        onTap: () {
+                          if (isInvisible) {
+                            setState(() {
+                              isInvisible = false;
+                            });
+                          } else {
+                            setState(() {
+                              isInvisible = true;
+                            });
+                          }
+                          print(isInvisible);
+            
+                          // isInvisible = !isInvisible;
+                        },
+                        child: isInvisible == true
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility)),
+                    hintStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF2C406E),
+                    ),
+                    border: OutlineInputBorder(),
+                  ),
+                  obscureText: isInvisible,
+                  // readOnly: true,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    } else if (isValidPassword(value)) {
+                      return null;
+                    } else {
+                      return 'Please enter a valid password';
+                    }
+                  },
+                  controller: passwordController,
+                  // onChanged: (value) {
+                  //   print(value);
+                  //
+                  decoration: InputDecoration(
+                    hintText: "Enter your password",
+                    prefixIcon: Icon(Icons.password),
+                    suffixIcon: InkWell(
+                        onTap: () {
+                          if (isInvisible) {
+                            setState(() {
+                              isInvisible = false;
+                            });
+                          } else {
+                            setState(() {
+                              isInvisible = true;
+                            });
+                          }
+                          print(isInvisible);
+            
+                          // isInvisible = !isInvisible;
+                        },
+                        child: isInvisible == true
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility)),
+                    hintStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF2C406E),
+                    ),
+                    border: OutlineInputBorder(),
+                  ),
+                  obscureText: isInvisible,
+                  // readOnly: true,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    } else if (isValidPassword(value)) {
+                      return null;
+                    } else {
+                      return 'Please enter a valid password';
+                    }
+                  },
+                  controller: passwordController,
+                  // onChanged: (value) {
+                  //   print(value);
+                  //
+                  decoration: InputDecoration(
+                    hintText: "Enter your password",
+                    prefixIcon: Icon(Icons.password),
+                    suffixIcon: InkWell(
+                        onTap: () {
+                          if (isInvisible) {
+                            setState(() {
+                              isInvisible = false;
+                            });
+                          } else {
+                            setState(() {
+                              isInvisible = true;
+                            });
+                          }
+                          print(isInvisible);
+            
+                          // isInvisible = !isInvisible;
+                        },
+                        child: isInvisible == true
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility)),
+                    hintStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF2C406E),
+                    ),
+                    border: OutlineInputBorder(),
+                  ),
+                  obscureText: isInvisible,
+                  // readOnly: true,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    } else if (isValidPassword(value)) {
+                      return null;
+                    } else {
+                      return 'Please enter a valid password';
+                    }
+                  },
+                  controller: passwordController,
+                  // onChanged: (value) {
+                  //   print(value);
+                  //
+                  decoration: InputDecoration(
+                    hintText: "Enter your password",
+                    prefixIcon: Icon(Icons.password),
+                    suffixIcon: InkWell(
+                        onTap: () {
+                          if (isInvisible) {
+                            setState(() {
+                              isInvisible = false;
+                            });
+                          } else {
+                            setState(() {
+                              isInvisible = true;
+                            });
+                          }
+                          print(isInvisible);
+            
+                          // isInvisible = !isInvisible;
+                        },
+                        child: isInvisible == true
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility)),
+                    hintStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF2C406E),
+                    ),
+                    border: OutlineInputBorder(),
+                  ),
+                  obscureText: isInvisible,
+                  // readOnly: true,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                          onPressed: () {},
+                          child: Text("Forgot Password?",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF5B67CA))))),
+                ),
+                TextButton(
+                    onPressed: () {
+                      loginAction();
+                    },
+                    child: Container(
+                        width: double.infinity,
+                        height: 45,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Color(0xFF5B67CA),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
+                        ))),
+                SizedBox(
+                  height: 20,
+                ),
+                dividerWidget(),
+                dontHaveAccountWidget()
+              ],
+            ),
           ),
         ),
       ),
@@ -190,7 +391,17 @@ class _LoginScreenState extends State<LoginScreen> {
     // emailController.text = "test@gmail.com";
   }
 
-  void loginAction() {
+  void loginAction() async {
+    final data = {
+      "email": emailController.text,
+      "password": passwordController.text
+    };
+    final returnData = await Navigator.pushNamed(context, "/home",
+        arguments: emailController.text);
+    print("data pop information  $returnData");
+    if (returnData is Map) {
+      print("data pop information  ${returnData['email']}");
+    }
 
     print("login action called");
     final validate = _formKey.currentState!.validate();
