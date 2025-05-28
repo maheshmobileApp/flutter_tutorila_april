@@ -40,8 +40,7 @@ class _CounterAppState extends State<CounterApp> {
 
   void incrementCounter()
     {
-     
-      
+    
      setState(() {
          counter = counter + 1;
      });
@@ -64,3 +63,48 @@ class _CounterAppState extends State<CounterApp> {
 // Business Logic
 
 //MVVM 
+// HTTP -> Hypertext Transfer Protocol
+
+
+/*
+
+HTPP Methods -> GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS
+
+Request 
+
+step 1:  find the what is http request method type - > 
+step 2: base url 
+step 3: endpoint
+step 4: header
+step 5: body (Get request does not have body) - (form data,x-www-form-urlencoded, raw,binary)
+step 6: query parameters
+step 7 : Authentication (Bearer token, Basic Auth, OAuth, etc.)
+
+
+
+
+
+Response 
+
+
+
+******
+
+
+Request 
+
+step 1:  find the what is http request method type - >  POST
+step 2: base url -> https://bnbevf6nveriumvumwe6jo6ism0ozogr.lambda-url.eu-north-1.on.aws/
+step 3: endpoint -> students/login
+step 4: header -> No header
+step 5: body (Get request does not have body) - (form data,x-www-form-urlencoded, raw,binary)
+ raw {
+  "email": "maheshy@example.com",
+  "password": "123456"
+}
+
+step 6: query parameters -No
+step 7 : Authentication (Bearer token, Basic Auth, OAuth, etc.) -> no 
+
+
+ */

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_april/expanded_widget.dart';
+import 'package:flutter_tutorial_april/setstate/dynamic_todo_list.dart';
 import 'package:flutter_tutorial_april/welcome_screen.dart';
 import 'splash.dart';
 import 'login_screen.dart';
@@ -6,6 +8,7 @@ import 'sign_up_screen.dart';
 import 'home_screen.dart';
 import 'listview/listview.dart';
 import 'setstate/counter_app.dart';
+
 void main() {
   // Entry point of the application
   runApp(MyApp()); // pass the widget to the runApp method
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: "/counterWithProvider",
+      initialRoute: "/welocme",
       routes: {
         "/splash":(context) => SplashScreen(),
         "/login":(context) => LoginScreen(),
@@ -26,6 +29,9 @@ class MyApp extends StatelessWidget {
         "/home": (context) => HomeScreen(),
         "/listview": (context) => ListviewScreen(),
         "/counterWithProvider": (context) => CounterApp(),
+        '/dynamicList': (context) => DynamicListView(),
+        '/expandedWidget': (context) => ExpandedWidget(),
+
       },
     );
   }
