@@ -8,6 +8,7 @@ import 'sign_up_screen.dart';
 import 'home_screen.dart';
 import 'listview/listview.dart';
 import 'setstate/counter_app.dart';
+import 'api/fetch_mobiles.dart';
 
 void main() {
   // Entry point of the application
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: "/welocme",
+      initialRoute: "/fetchMobiles",
       routes: {
         "/splash":(context) => SplashScreen(),
         "/login":(context) => LoginScreen(),
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         "/counterWithProvider": (context) => CounterApp(),
         '/dynamicList': (context) => DynamicListView(),
         '/expandedWidget': (context) => ExpandedWidget(),
+        '/fetchMobiles': (context) => FetchMobiles(),
 
       },
     );
