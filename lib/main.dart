@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tutorial_april/expanded_widget.dart';
+import 'package:flutter_tutorial_april/provider/counter_provider.dart';
 import 'package:flutter_tutorial_april/setstate/dynamic_todo_list.dart';
 import 'package:flutter_tutorial_april/welcome_screen.dart';
 import 'splash.dart';
@@ -9,7 +10,8 @@ import 'home_screen.dart';
 import 'listview/listview.dart';
 import 'setstate/counter_app.dart';
 import 'api/fetch_mobiles.dart';
-
+import 'provider/counter_app_with_provider_view.dart';
+import 'package:provider/provider.dart';
 void main() {
   // Entry point of the application
   runApp(MyApp()); // pass the widget to the runApp method
@@ -19,22 +21,31 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/fetchMobiles",
-      routes: {
-        "/splash":(context) => SplashScreen(),
-        "/login":(context) => LoginScreen(),
-        "/signup":(context) => SignUpScreen(),
-        "/welocme":(context) => WelcomeScreen(),
-        "/home": (context) => HomeScreen(),
-        "/listview": (context) => ListviewScreen(),
-        "/counterWithProvider": (context) => CounterApp(),
-        '/dynamicList': (context) => DynamicListView(),
-        '/expandedWidget': (context) => ExpandedWidget(),
-        '/fetchMobiles': (context) => FetchMobiles(),
-
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CounterProvider(),
+        ),
+        // Add other providers here if needed
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: "/counterAppWithProvider",
+        routes: {
+          "/splash": (context) => SplashScreen(),
+          "/login": (context) => LoginScreen(),
+          "/signup": (context) => SignUpScreen(),
+          "/welocme": (context) => WelcomeScreen(),
+          "/home": (context) => HomeScreen(),
+          "/listview": (context) => ListviewScreen(),
+          "/counterWithProvider": (context) => CounterApp(),
+          '/dynamicList': (context) => DynamicListView(),
+          '/expandedWidget': (context) => ExpandedWidget(),
+          '/fetchMobiles': (context) => FetchMobiles(),
+          '/counterAppWithProvider': (context) => CounterAppWithProvider(),
+      
+        },
+      ),
     );
   }
 }
