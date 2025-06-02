@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tutorial_april/expanded_widget.dart';
-import 'package:flutter_tutorial_april/provider/counter_provider.dart';
-import 'package:flutter_tutorial_april/setstate/dynamic_todo_list.dart';
-import 'package:flutter_tutorial_april/welcome_screen.dart';
-import 'splash.dart';
-import 'login_screen.dart';
-import 'sign_up_screen.dart';
-import 'home_screen.dart';
-import 'listview/listview.dart';
-import 'setstate/counter_app.dart';
-import 'api/fetch_mobiles.dart';
-import 'provider/counter_app_with_provider_view.dart';
+import 'package:flutter_tutorial_april/classes/expanded_widget.dart';
+import 'package:flutter_tutorial_april/classes/api/provider/counter_provider.dart';
+import 'package:flutter_tutorial_april/classes/setstate/dynamic_todo_list.dart';
+import 'classes/splash.dart';
+import 'classes/login_screen.dart';
+import 'classes/sign_up_screen.dart';
+import 'classes/home_screen.dart';
+import 'classes/listview/listview.dart';
+import 'classes/setstate/counter_app.dart';
+import 'classes/api/fetch_mobiles.dart';
+import 'classes/api/provider/counter_app_with_provider_view.dart';
 import 'package:provider/provider.dart';
+
+import 'ui/welcome/widgets/welcome_screen.dart';
 void main() {
   // Entry point of the application
   runApp(MyApp()); // pass the widget to the runApp method
@@ -28,23 +29,24 @@ class MyApp extends StatelessWidget {
         ),
         // Add other providers here if needed
       ],
-      child: MaterialApp(
+      child:const MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: "/counterAppWithProvider",
-        routes: {
-          "/splash": (context) => SplashScreen(),
-          "/login": (context) => LoginScreen(),
-          "/signup": (context) => SignUpScreen(),
-          "/welocme": (context) => WelcomeScreen(),
-          "/home": (context) => HomeScreen(),
-          "/listview": (context) => ListviewScreen(),
-          "/counterWithProvider": (context) => CounterApp(),
-          '/dynamicList': (context) => DynamicListView(),
-          '/expandedWidget': (context) => ExpandedWidget(),
-          '/fetchMobiles': (context) => FetchMobiles(),
-          '/counterAppWithProvider': (context) => CounterAppWithProvider(),
+        home: WelcomeScreen()
+        // initialRoute: "/counterAppWithProvider",
+        // routes: {
+        //   "/splash": (context) => SplashScreen(),
+        //   "/login": (context) => LoginScreen(),
+        //   "/signup": (context) => SignUpScreen(),
+        //   "/welocme": (context) => WelcomeScreen(),
+        //   "/home": (context) => HomeScreen(),
+        //   "/listview": (context) => ListviewScreen(),
+        //   "/counterWithProvider": (context) => CounterApp(),
+        //   '/dynamicList': (context) => DynamicListView(),
+        //   '/expandedWidget': (context) => ExpandedWidget(),
+        //   '/fetchMobiles': (context) => FetchMobiles(),
+        //   '/counterAppWithProvider': (context) => CounterAppWithProvider(),
       
-        },
+        // },
       ),
     );
   }

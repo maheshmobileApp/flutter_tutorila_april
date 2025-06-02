@@ -148,7 +148,6 @@ class _FetchMobilesState extends State<FetchMobiles> {
 MVVM -> architecture pattern
 Provider -> state management
 
-
 1.Sign up
 2.Login
 3. Home Screen -> categories (inprogress,completed,pending,cancelled)
@@ -158,6 +157,20 @@ Provider -> state management
 7. Delete Task
 8. Logout
 
+Relatime application 
+
+Authentication Flow 
+Splash Screen 
+Loader 
+Services Layer -> API calls, local storage, 
+
+MVVM -> Model, View, ViewModel, repository, Services Layer
+unit testing 
+locallization
+Resuble compoments 
+Firbase push notifications -
+
+Firbase -s au, storage, db 
 
 
  */

@@ -8,6 +8,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  int a = 10;
   @override
   Widget build(BuildContext context) {
       return  Scaffold(
@@ -15,7 +16,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         title: const Text('Sign Up Screen'),
       ),
       body: Container(
-        child: Text("Sign up screen"),
+        child:const Text("Sign up screen"),
       ),
     );
   }
