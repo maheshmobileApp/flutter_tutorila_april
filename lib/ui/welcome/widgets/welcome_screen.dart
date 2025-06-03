@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/button_widget.dart';
+import 'package:flutter_tutorial_april/ui/core/ui/widgets/event_card_widget.dart';
+import 'package:flutter_tutorial_april/ui/core/ui/widgets/input_text_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key}) ;
@@ -22,23 +24,47 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Expanded(
             flex: 6,
             child: Container()),
-             Expanded(flex: 2, child: Container(
+        Expanded(
+            flex: 10,
+            child: Container(
               child: Column(
                 children: [
                   ButtonWidget(title: 'Login',
-
-                   onPressed: (){}),
-                  const SizedBox(height: 20,),
-                   ButtonWidget(title: 'Sign Up', onPressed: () {}),
-                        const SizedBox(
-                    height: 20,
+                   onPressed: () {}),
+                  const SizedBox(
+                    height: 10,
                   ),
-                  ButtonWidget(title: 'Sign Up', onPressed: () {})
-
+                  ButtonWidget(title: 'Sign Up', onPressed: () {}),
+                  InputTextWidget(
+                    hintTex: 'Enter your email',
+                    controller: TextEditingController(),
+                    textInputType: TextInputType.emailAddress,
+                    prefixIcon: const Icon(Icons.email, color: Colors.grey),
+                  ),
+                  InputTextWidget(
+                    hintTex: 'Enter your email',
+                    controller: TextEditingController(),
+                    textInputType: TextInputType.emailAddress,
+                    suffixIcon:
+                        const Icon(Icons.visibility, color: Colors.grey),
+                  ),
+                  const EventCardWidget(
+                      title: 'Read a book about UI',
+                      timings: '09:00 - 11:00 AM'),
+                  const EventCardWidget(
+                      backgroundColor: Colors.blue,
+                      title: 'Read a book about UI',
+                      timings: '09:00 - 11:00 AM'),
+                  const EventCardWidget(
+                      title: 'Read a book about UI',
+                      timings: '09:00 - 11:00 AM'),
+                  const EventCardWidget(
+                      backgroundColor: Colors.blue,
+                      title: 'Read a book about UI',
+                      timings: '09:00 - 11:00 AM')
                 ],
               ),
-             ))
-          
+            ))
         ]
       ),
     );
