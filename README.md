@@ -31,7 +31,7 @@ data
 config
 ├─── utils
 ├─── routing
-
+## Folder Structure
 lib
 ├─┬─ ui
 │ ├─┬─ core
@@ -72,3 +72,56 @@ test
 testing
 ├─── fakes
 └─── models
+
+## Button Widget usage
+
+ ButtonWidget(title: 'Login', onPressed: () {}),
+              const SizedBox(
+                height: 10,
+              ),
+
+              ButtonWidget(title: 'Sign Up', onPressed: () {}),
+
+## Textfiled Widget usage
+
+
+              InputTextWidget(
+                hintTex: 'Enter your email',
+                controller: TextEditingController(),
+                textInputType: TextInputType.emailAddress,
+                prefixIcon: const Icon(Icons.email, color: Colors.grey),
+              ),
+              InputTextWidget(
+                hintTex: 'Enter your email',
+                controller: TextEditingController(),
+                textInputType: TextInputType.emailAddress,
+                suffixIcon: const Icon(Icons.visibility, color: Colors.grey),
+              ),
+
+## event Card
+
+              const EventCardWidget(
+                  title: 'Read a book about UI', timings: '09:00 - 11:00 AM'),
+              const EventCardWidget(
+                  backgroundColor: Colors.blue,
+                  title: 'Read a book about UI',
+                  timings: '09:00 - 11:00 AM'),
+              const EventCardWidget(
+                  title: 'Read a book about UI', timings: '09:00 - 11:00 AM'),
+              const EventCardWidget(
+                  backgroundColor: Colors.blue,
+                  title: 'Read a book about UI',
+                  timings: '09:00 - 11:00 AM'),
+
+##  category card
+              const CategoryCard(
+                  title: "Web Design", subtitle: "356236", count: 10),
+              const CategoryCard(
+                  title: "Web Design", subtitle: "356236", count: 60),
+
+##  Task Card
+               TaskCard(
+                  title: 'title',
+                  description: 'description',
+                  timings: 'timings',
+                  onPressed: () {})

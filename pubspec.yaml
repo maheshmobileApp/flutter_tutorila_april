@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   dio: ^5.8.0+1
   provider: ^6.1.5
+  carousel_slider: ^5.0.0
+  flutter_svg: ^2.1.0
 
 
 
