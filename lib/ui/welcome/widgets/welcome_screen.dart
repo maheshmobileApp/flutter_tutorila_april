@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_tutorial_april/routing/app_routes_names.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/button_widget.dart';
-import 'package:flutter_tutorial_april/ui/core/ui/widgets/category_card.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/slider_widget.dart';
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -17,7 +16,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
-        Expanded(flex: 6, child: _buildCarousel()),
+        SizedBox(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: _buildCarousel()),
         Expanded(flex: 1, child: _buildActionsWidget())
       ]),
     );
@@ -48,8 +49,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ButtonWidget(title: 'Login', onPressed: () {}),
-          ButtonWidget(title: 'Sign Up', onPressed: () {})
+          ButtonWidget(
+              title: 'Login',
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutesNames.login);
+              }),
+          ButtonWidget(
+              title: 'Sign Up',
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutesNames.signup);
+              })
         ]);
   }
 }
