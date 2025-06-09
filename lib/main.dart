@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tutorial_april/routing/app_routes.dart';
 import 'package:flutter_tutorial_april/routing/app_routes_names.dart';
+import 'package:flutter_tutorial_april/ui/signup/view_model/sign_up_view_model.dart';
 import 'package:provider/provider.dart';
 
 import 'classes/api/provider/counter_provider.dart';
@@ -18,13 +19,17 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => CounterProvider(),
+          
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SignUpViewModel(),
         ),
         // Add other providers here if needed
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: AppRoutes.appRoutes,
-        initialRoute: AppRoutesNames.bottomBar,
+        initialRoute: AppRoutesNames.welcome,
       ),
     );
   }
