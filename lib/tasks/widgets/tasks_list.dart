@@ -10,8 +10,10 @@ class TasksList extends StatefulWidget {
 class _TasksListState extends State<TasksList> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      body: Container(
+        color: Colors.red
+      ),
     );
   }
-}
+  }

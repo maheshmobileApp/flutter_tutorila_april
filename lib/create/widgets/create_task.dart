@@ -10,8 +10,11 @@ class CreateTask extends StatefulWidget {
 class _CreateTaskState extends State<CreateTask> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+     return Scaffold(
+      body: Container(
+        color: Colors.yellow
+      ),
     );
   }
+  
 }
