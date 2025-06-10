@@ -56,6 +56,9 @@ class _LoginScreenState extends State<SignUpScreen> {
                 ),
                 InputTextWidget(
                     hintTex: "Enter Name", controller: nameController),
+                        const SizedBox(
+                  height: 30,
+                ),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -98,10 +101,8 @@ class _LoginScreenState extends State<SignUpScreen> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
-                    } else if (isValidPassword(value)) {
+                    }  else {
                       return null;
-                    } else {
-                      return 'Please enter a valid password';
                     }
                   },
                   controller: passwordController,
