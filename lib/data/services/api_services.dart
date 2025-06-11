@@ -1,15 +1,33 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_tutorial_april/data/model/api_response_model.dart';
 
 class ApiServices {
   final dio = Dio();
 
-  Future<dynamic> postRequest(String url, {dynamic data}) async {
+  Future<ApiResponseModel> postRequest(String url, {dynamic data}) async {
     try {
-
       final response = await dio.post(url, data: data);
-      return response.data;
+      switch (response.statusCode) {
+        case 200:
+        case 201:
+          return ApiResponseModel(
+            data: response.data,
+            message: 'Request successful',
+            status: true,
+          );
+        default:
+          return ApiResponseModel(
+            data: null,
+            message: 'Request failed with status: ${response.statusCode}',
+            status: false,
+          );
+      }
     } catch (e) {
-      throw Exception('Failed to post data: $e');
+      return ApiResponseModel(
+        data: '',
+        message: 'An error occurred: $e',
+        status: false,
+      );
     }
   }
 

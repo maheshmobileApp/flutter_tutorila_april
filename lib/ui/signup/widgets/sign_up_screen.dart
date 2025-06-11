@@ -3,6 +3,8 @@ import 'package:flutter_tutorial_april/data/model/signUp_input_model.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/button_widget.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/input_text_widget.dart';
 import 'package:flutter_tutorial_april/ui/signup/view_model/sign_up_view_model.dart';
+import 'package:flutter_tutorial_april/utils/constants/alert_popup.dart';
+import 'package:flutter_tutorial_april/utils/constants/loader.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -226,9 +228,20 @@ class _LoginScreenState extends State<SignUpScreen> {
         name: nameController.text,
         email: emailController.text,
         password: passwordController.text);
-
-        signUpViewModel.signUp(payload);
-
+    //Loader
+    Loaders.circularShowLoader(context);
+    final result = await signUpViewModel.signUp(payload);
+    Loaders.circularHideLoader(context);
+    print(result.data);
+    //hide the loader
+    if (result.status == false) {
+      //Alert dialog
+      alertPopup(context, result.message);
+    } else {
+      final data = result.data; //{message: Email already in use, error: true}
+      final message = data['message'] ?? "Something went wrong";
+      alertPopup(context, message);
+    }
   }
 
   bool isValidEmail(String email) {

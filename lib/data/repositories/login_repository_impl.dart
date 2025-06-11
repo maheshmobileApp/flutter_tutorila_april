@@ -1,3 +1,4 @@
+import 'package:flutter_tutorial_april/data/model/api_response_model.dart';
 import 'package:flutter_tutorial_april/data/model/signUp_input_model.dart';
 import 'package:flutter_tutorial_april/data/repositories/login_repository.dart';
 import 'package:flutter_tutorial_april/data/services/api_services.dart';
@@ -12,7 +13,7 @@ class LoginRepositoryImpl extends LoginRepository {
   }
   
   @override
-  Future<dynamic> signUp(SignUpInputModel signUpInputModel) async {
+  Future<ApiResponseModel> signUp(SignUpInputModel signUpInputModel) async {
     const url = ApiConstants.baseUrl + ApiConstants.signUp;
   return  await apiServices.postRequest(url, data: signUpInputModel.toJson());
   }
