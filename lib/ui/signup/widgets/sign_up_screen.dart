@@ -57,7 +57,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                   height: 30,
                 ),
                 InputTextWidget(
-                    hintTex: "Enter Name", controller: nameController),
+                    hintText: "Enter Name", controller: nameController),
                         const SizedBox(
                   height: 30,
                 ),

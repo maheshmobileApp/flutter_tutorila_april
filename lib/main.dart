@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tutorial_april/data/repositories/login_repository_impl.dart';
 import 'package:flutter_tutorial_april/routing/app_routes.dart';
 import 'package:flutter_tutorial_april/routing/app_routes_names.dart';
+import 'package:flutter_tutorial_april/ui/login/view_model/sign_in_view_model.dart';
 import 'package:flutter_tutorial_april/ui/signup/view_model/sign_up_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) =>
               SignUpViewModel(loginRepository: LoginRepositoryImpl()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) =>
+              SignInViewModel(loginRepository: LoginRepositoryImpl()),
         ),
         // Add other providers here if needed
       ],

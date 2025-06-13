@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_april/routing/app_routes_names.dart';
+import 'package:flutter_tutorial_april/utils/constants/local_storate_constant.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -78,6 +81,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       ),
     );
   }
+
+
 }
 //5B67CA/*
 // //  static const Color primary = Color(0xFF5B67CA);

@@ -4,19 +4,21 @@ import 'package:flutter_tutorial_april/utils/constants/appcolors/app_colors.dart
 class InputTextWidget extends StatelessWidget {
   const InputTextWidget(
       {super.key,
-      required this.hintTex,
+      required this.hintText,
       required this.controller,
       this.textInputType = TextInputType.text,
       this.validator,
       this.suffixIcon,
-      this.prefixIcon});
+      this.prefixIcon,
+      this.isPasswordVisible = false});
 
-  final String hintTex;
+  final String hintText;
   final TextInputType? textInputType;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final bool isPasswordVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +26,11 @@ class InputTextWidget extends StatelessWidget {
       controller: controller,
       keyboardType: textInputType,
       validator: validator,
+      obscureText: isPasswordVisible,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        hintText: hintTex,
+        hintText: hintText,
         hintStyle: const TextStyle(
           color: AppColors.hintTextColor,
           fontSize: 16,

@@ -40,6 +40,7 @@ dependencies:
   carousel_slider: ^5.0.0
   flutter_svg: ^2.1.0
   convex_bottom_bar: ^3.2.0
+  shared_preferences: ^2.5.3
 
 
 

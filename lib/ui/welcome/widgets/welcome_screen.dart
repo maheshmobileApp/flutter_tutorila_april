@@ -3,6 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_tutorial_april/routing/app_routes_names.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/button_widget.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/slider_widget.dart';
+import 'package:flutter_tutorial_april/utils/constants/local_storate_constant.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -60,5 +62,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Navigator.pushNamed(context, AppRoutesNames.signup);
               })
         ]);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkuserSession();
+  }
+
+  checkuserSession() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString(LocalStorageConstants.token) ?? "";
+    if (token.isNotEmpty) {
+      // User is logged in, navigate to home screen
+      Navigator.pushReplacementNamed(context, AppRoutesNames.bottomBar);
+    } else {
+      // User is not logged in, stay on welcome screen
+      print("User is not logged in");
+    }
   }
 }
