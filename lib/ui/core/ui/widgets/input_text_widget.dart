@@ -10,7 +10,9 @@ class InputTextWidget extends StatelessWidget {
       this.validator,
       this.suffixIcon,
       this.prefixIcon,
-      this.isPasswordVisible = false});
+      this.isPasswordVisible = false,
+      this.isReadOnly = false,
+      this.maxLines});
 
   final String hintText;
   final TextInputType? textInputType;
@@ -19,6 +21,9 @@ class InputTextWidget extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool isPasswordVisible;
+  final bool isReadOnly;
+  final int? maxLines;
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +32,8 @@ class InputTextWidget extends StatelessWidget {
       keyboardType: textInputType,
       validator: validator,
       obscureText: isPasswordVisible,
+      maxLines: maxLines,
+      readOnly: isReadOnly,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,

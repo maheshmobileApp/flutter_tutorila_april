@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_april/create/view_model/create_task_view_model.dart';
 import 'package:flutter_tutorial_april/data/repositories/login_repository_impl.dart';
 import 'package:flutter_tutorial_april/routing/app_routes.dart';
 import 'package:flutter_tutorial_april/routing/app_routes_names.dart';
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) =>
               SignInViewModel(loginRepository: LoginRepositoryImpl()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CreateTaskViewModel(),
         ),
         // Add other providers here if needed
       ],
