@@ -6,7 +6,7 @@ class CreateTaskViewModel extends ChangeNotifier {
   DateTime? dueDate ;
   List<String> taskTypes = ['Personal', 'Work', 'Study',"Meeting","Event"];
   String? selectedType;
-  List<String> prioriTy = ['Low', 'Medium', 'High'];
+  List<String> priorityOptions = ['Low', 'Medium', 'High'];
   String? selectedPriority;
   List<String> tags = [];
   String? attachement;

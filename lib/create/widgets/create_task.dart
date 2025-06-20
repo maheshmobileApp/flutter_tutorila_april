@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tutorial_april/classes/api/provider/counter_provider.dart';
 import 'package:flutter_tutorial_april/create/view_model/create_task_view_model.dart';
+import 'package:flutter_tutorial_april/ui/core/ui/widgets/button_widget.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/input_text_widget.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class CreateTask extends StatefulWidget {
@@ -17,10 +18,6 @@ class _CreateTaskState extends State<CreateTask> {
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   late CreateTaskViewModel createTaskViewModel;
-
-  // Add priority selection variable
-  String? selectedPriority;
-  final List<String> priorityOptions = ['Low', 'Medium', 'High', 'Critical'];
 
   @override
 
@@ -85,14 +82,86 @@ class _CreateTaskState extends State<CreateTask> {
               // Add Priority Selection Button
               ElevatedButton(
                 onPressed: selectPriority,
-                child: Text(selectedPriority != null
-                    ? 'Priority: $selectedPriority'
+                child: Text(createTaskViewModel.selectedPriority != null
+                    ? 'Priority: ${createTaskViewModel.selectedPriority}'
                     : 'Select Priority'),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              selectTypeOfTask(),
+              const SizedBox(
+                height: 10,
+              ),
+              selectAttachment(),
             ],
           ),
         ));
   }
+
+  Widget selectTypeOfTask() {
+    final tasksType = createTaskViewModel.taskTypes;
+    return DropdownButtonFormField(
+        value: createTaskViewModel.selectedType,
+        hint: const Text("Please Select Task Type"),
+        items: tasksType
+            .map((item) => DropdownMenuItem(
+                  value: item,
+                  child: Text(item),
+                ))
+            .toList(),
+        onChanged: (value) {
+          createTaskViewModel.selectedType = value;
+        });
+  }
+
+  Widget selectAttachment() {
+    return ButtonWidget(
+        title: "Select Attachment",
+        onPressed: () {
+          //Gallery or Camera
+          chooseTheAttachmentType();
+        });
+  }
+
+  chooseTheAttachmentType() {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Gallery"),
+                onTap: () {
+                  Navigator.pop(context);
+                  takePicture(ImageSource.gallery);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.camera),
+                title: const Text("Camera"),
+                onTap: () {
+                  Navigator.pop(context);
+                  takePicture(ImageSource.camera);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  takePicture(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(source: source);
+  }
+
+
 
   showTheStartDatePicker() {
     showDatePicker(
@@ -135,14 +204,15 @@ class _CreateTaskState extends State<CreateTask> {
             builder: (BuildContext context, StateSetter setDialogState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
-                children: priorityOptions.map((String priority) {
+                children:
+                    createTaskViewModel.priorityOptions.map((String priority) {
                   return RadioListTile<String>(
                     title: Text(priority),
                     value: priority,
-                    groupValue: selectedPriority,
+                    groupValue: createTaskViewModel.selectedPriority,
                     onChanged: (String? value) {
                       setDialogState(() {
-                        selectedPriority = value;
+                        createTaskViewModel.selectedPriority = value;
                       });
                     },
                   );
