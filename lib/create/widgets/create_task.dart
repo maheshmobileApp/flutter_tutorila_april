@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tutorial_april/create/view_model/create_task_view_model.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/button_widget.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/input_text_widget.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CreateTask extends StatefulWidget {
@@ -34,14 +37,26 @@ class _CreateTaskState extends State<CreateTask> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<CreateTaskViewModel>(context);
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Create Task"),
-        ),
+        backgroundColor: Colors.lightBlue[50],
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: SizedBox(
+                    width: 200,
+                    child: ButtonWidget(
+                        title: 'Save',
+                        onPressed: () {
+                          createTaskViewModel.saveTask(
+                            titleController.text,
+                            descriptionController.text,
+                          );
+                        })),
+              ),
               InputTextWidget(hintText: 'Title', controller: titleController),
               const SizedBox(
                 height: 10,
@@ -55,12 +70,12 @@ class _CreateTaskState extends State<CreateTask> {
                 height: 10,
               ),
               InputTextWidget(
-                hintText: '',
+                hintText: 'Start Date',
                 controller: startDateController,
                 isReadOnly: true,
                 suffixIcon: InkWell(
                     onTap: () {
-                      showTheStartDatePicker();
+                      showTheStartDatePicker(viewModel);
                     },
                     child: const Icon(Icons.calendar_month)),
               ),
@@ -68,12 +83,12 @@ class _CreateTaskState extends State<CreateTask> {
                 height: 10,
               ),
               InputTextWidget(
-                  hintText: '',
+                  hintText: 'End Date',
                   controller: endDateController,
                   isReadOnly: true,
                   suffixIcon: InkWell(
                       onTap: () {
-                        showTheEndDatePicker();
+                        showTheEndDatePicker(viewModel);
                       },
                       child: const Icon(Icons.calendar_month))),
               const SizedBox(
@@ -93,10 +108,21 @@ class _CreateTaskState extends State<CreateTask> {
               const SizedBox(
                 height: 10,
               ),
+              attachmentView(viewModel),
               selectAttachment(),
             ],
           ),
         ));
+  }
+
+  Widget attachmentView(CreateTaskViewModel viewModel) {
+    return viewModel.attachement != null
+        ? Image.file(
+            File(viewModel.attachement!.path),
+            height: 100,
+            width: 100,
+          )
+        : const Text("No Attachment Selected");
   }
 
   Widget selectTypeOfTask() {
@@ -159,11 +185,13 @@ class _CreateTaskState extends State<CreateTask> {
   takePicture(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
     XFile? image = await picker.pickImage(source: source);
+    print(image?.path);
+    createTaskViewModel.setImage(image);
   }
 
 
 
-  showTheStartDatePicker() {
+  showTheStartDatePicker(CreateTaskViewModel createTaskViewModel) {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -171,6 +199,10 @@ class _CreateTaskState extends State<CreateTask> {
       lastDate: DateTime(2100),
     ).then((selectedDate) {
       if (selectedDate != null) {
+        final DateTime startDate = selectedDate;
+        final DateFormat formatter = DateFormat('EEEE, MMM d, yyyy');
+        final String formattedDate = formatter.format(startDate);
+        startDateController.text = formattedDate;
         createTaskViewModel.setStartDate(selectedDate);
         // setState(() {
         //   startDateController.text = selectedDate.toLocal().toString().split(' ')[0];
@@ -179,14 +211,19 @@ class _CreateTaskState extends State<CreateTask> {
     });
   }
 
-  showTheEndDatePicker() {
+  showTheEndDatePicker(CreateTaskViewModel createTaskViewModel) {
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: createTaskViewModel.startDate ?? DateTime.now(),
       firstDate: createTaskViewModel.startDate ?? DateTime.now(),
       lastDate: DateTime(2100),
     ).then((selectedDate) {
       if (selectedDate != null) {
+        final DateTime startDate = selectedDate;
+        final DateFormat formatter = DateFormat('MM/dd/yyyy');
+        final String formattedDate = formatter.format(startDate);
+        endDateController.text = formattedDate;
+        createTaskViewModel.setDueDate(selectedDate);
         // setState(() {
         //   startDateController.text = selectedDate.toLocal().toString().split(' ')[0];
         // });
