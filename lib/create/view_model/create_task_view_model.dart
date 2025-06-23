@@ -44,3 +44,26 @@ class CreateTaskViewModel extends ChangeNotifier {
 
   
 }
+
+/*
+api 
+
+sqflite - save the data in the local database 
+
+Task_table 
+
+task_id
+task_title
+task_description
+task_start_date
+task_due_date
+task_type
+task_priority
+task_tags
+task_attachment
+
+C
+R
+U
+D 
+ */
