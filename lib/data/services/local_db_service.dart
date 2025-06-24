@@ -28,6 +28,7 @@ class DatabaseService {
   _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, _databaseName);
+    print("Database path: $path");
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
   }
@@ -35,8 +36,8 @@ class DatabaseService {
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-     CREATE TABLE $taskTable (
-     task_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      CREATE TABLE $taskTable (
+      task_id INTEGER PRIMARY KEY AUTOINCREMENT,
       task_title TEXT NOT NULL,
       task_description TEXT,
       task_start_date TEXT,
