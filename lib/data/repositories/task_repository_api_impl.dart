@@ -7,4 +7,10 @@ class TaskRepositoryApiImpl extends TaskRepository {
     // TODO: implement saveTheTask
     throw UnimplementedError();
   }
+  
+  @override
+  Future<List<Task>> getAllTasks() {
+    // TODO: implement getAllTasks
+    throw UnimplementedError();
+  }
 }

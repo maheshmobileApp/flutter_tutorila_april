@@ -12,7 +12,7 @@ class InputTextWidget extends StatelessWidget {
       this.prefixIcon,
       this.isPasswordVisible = false,
       this.isReadOnly = false,
-      this.maxLines});
+      this.maxLines = 1});
 
   final String hintText;
   final TextInputType? textInputType;

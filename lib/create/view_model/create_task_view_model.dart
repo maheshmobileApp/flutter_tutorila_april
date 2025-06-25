@@ -16,6 +16,8 @@ class CreateTaskViewModel extends ChangeNotifier {
   List<String> tags = [];
   XFile? attachement;
 
+  List<Task> tasks = [];
+
   void setStartDate(DateTime date) {
     startDate = date;
     notifyListeners();
@@ -55,7 +57,11 @@ class CreateTaskViewModel extends ChangeNotifier {
     final response = taskRepository.saveTheTask(task);
   }
 
-  
+  getAllTasks() async {
+    var task = await taskRepository.getAllTasks();
+    tasks = task;
+    notifyListeners();
+  }
 }
 
 /*

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_april/create/view_model/create_task_view_model.dart';
+import 'package:provider/provider.dart';
 
 class TasksList extends StatefulWidget {
   const TasksList({ Key? key }) : super(key: key);
@@ -10,10 +12,40 @@ class TasksList extends StatefulWidget {
 class _TasksListState extends State<TasksList> {
   @override
   Widget build(BuildContext context) {
+    final taskVm = Provider.of<CreateTaskViewModel>(context);
     return Scaffold(
-      body: Container(
-        color: Colors.red
-      ),
-    );
+        body: ListView.builder(
+      itemCount: taskVm.tasks.length,
+      itemBuilder: (context, index) {
+        final task = taskVm.tasks[index];
+        return Card(
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              title: Text(task.title),
+              subtitle: Text(task.description),
+              trailing: IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {},
+              ),
+            ),
+          ),
+        );
+        
+      },
+    ));
   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchAllTasks();
+    super.initState();
   }
+
+  fetchAllTasks() async {
+    final taskVm = Provider.of<CreateTaskViewModel>(context, listen: false);
+    await taskVm.getAllTasks();
+  }
+}

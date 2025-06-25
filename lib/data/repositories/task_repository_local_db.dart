@@ -30,9 +30,26 @@ class TaskRepositoryLocalDb  extends TaskRepository{
       return false;
     }
   }
+  
+  @override
+  Future<List<Task>> getAllTasks() async {
+    final db = await DatabaseService.instance.database;
+    const String query = 'SELECT * FROM ${DatabaseService.taskTable}';
+    final List<Map<String, dynamic>> taskData = await db!.rawQuery(query);
+    List<Task> tasks = [];
+    for (var element in taskData) {
+      Task task = Task.fromJson(element);
+      tasks.add(task);
+    }
+    print("data from local db: $taskData");
+    // final List<Map<String, dynamic>> maps = await db!.query(DatabaseService.taskTable);
+    return tasks;
+  }
 
 }
 /*
+
+[{task_id: 1, task_title: test, task_description: sdfasdfsa, task_start_date: 2025-06-24 00:00:00.000, task_due_date: 2025-06-26 00:00:00.000, task_type: Personal, task_priority: High, task_tags: , task_attachment: null, isSync: 0}, {task_id: 2, task_title: task 1, task_description: task details , task_start_date: 2025-06-26 00:00:00.000, task_due_date: 2025-06-28 00:00:00.000, task_type: Personal, task_priority: High, task_tags: , task_attachment: null, isSync: 0}]
 
 R
 U
