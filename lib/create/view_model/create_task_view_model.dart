@@ -62,6 +62,16 @@ class CreateTaskViewModel extends ChangeNotifier {
     tasks = task;
     notifyListeners();
   }
+
+  deleteTask(int taskId) async {
+    final result = await taskRepository.deleteTask(taskId);
+    if (result) {
+      // getAllTasks();
+      tasks.removeWhere((task) => task.taskId == taskId);
+      notifyListeners();
+    }
+  
+  }
 }
 
 /*

@@ -13,4 +13,10 @@ class TaskRepositoryApiImpl extends TaskRepository {
     // TODO: implement getAllTasks
     throw UnimplementedError();
   }
+  
+  @override
+  Future<bool> deleteTask(int taskId) {
+    // TODO: implement deleteTask
+    throw UnimplementedError();
+  }
 }

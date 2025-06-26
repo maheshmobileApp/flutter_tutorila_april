@@ -45,6 +45,26 @@ class TaskRepositoryLocalDb  extends TaskRepository{
     // final List<Map<String, dynamic>> maps = await db!.query(DatabaseService.taskTable);
     return tasks;
   }
+  
+  @override
+  Future<bool> deleteTask(int taskId) async {
+    final db = await DatabaseService.instance.database;
+    try {
+      String query =
+          'DELETE FROM ${DatabaseService.taskTable} WHERE task_id = $taskId';
+      final result = await db!.rawDelete(query);
+      if (result > 0) {
+        print('Task with ID $taskId deleted successfully');
+        return true;
+      } else {
+        print('No task found with ID $taskId');
+        return false;
+      }
+    } catch (e) {
+      print('Error deleting task: $e');
+      return false;
+    }
+  }
 
 }
 /*
