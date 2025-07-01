@@ -112,3 +112,22 @@ task_attachment
     return await db!.delete(taskTable);
   }
 }
+
+/*
+
+Api -> Sign up, sign in,create task 
+
+Firebase 
+
+Authentication -> Sign up , sign in 
+
+Firestore 
+
+Firebase Storage
+
+Push Notification
+
+
+
+
+ */

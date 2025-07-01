@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tutorial_april/create/view_model/create_task_view_model.dart';
 import 'package:flutter_tutorial_april/data/repositories/login_repository_impl.dart';
 import 'package:flutter_tutorial_april/data/repositories/task_repository_local_db.dart';
+import 'package:flutter_tutorial_april/firebase_options.dart';
 import 'package:flutter_tutorial_april/routing/app_routes.dart';
 import 'package:flutter_tutorial_april/routing/app_routes_names.dart';
 import 'package:flutter_tutorial_april/ui/login/view_model/sign_in_view_model.dart';
@@ -10,8 +12,12 @@ import 'package:provider/provider.dart';
 
 import 'classes/api/provider/counter_provider.dart';
 
-void main() {
+void main()async {
   // Entry point of the application
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(MyApp()); // pass the widget to the runApp method
 }
 
