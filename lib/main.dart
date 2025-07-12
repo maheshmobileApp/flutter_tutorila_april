@@ -4,6 +4,7 @@ import 'package:flutter_tutorial_april/create/view_model/create_task_view_model.
 import 'package:flutter_tutorial_april/data/repositories/login_repository_impl.dart';
 import 'package:flutter_tutorial_april/data/repositories/task_repository_local_db.dart';
 import 'package:flutter_tutorial_april/firebase_options.dart';
+import 'package:flutter_tutorial_april/pushnotification_service.dart';
 import 'package:flutter_tutorial_april/routing/app_routes.dart';
 import 'package:flutter_tutorial_april/routing/app_routes_names.dart';
 import 'package:flutter_tutorial_april/ui/login/view_model/sign_in_view_model.dart';
@@ -18,6 +19,7 @@ void main()async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 );
+await FirebasePushNotifications().initNotifications();
   runApp(MyApp()); // pass the widget to the runApp method
 }
 
@@ -57,7 +59,7 @@ class MyApp extends StatelessWidget {
 
 //Launching lib/main.dart on Chrome in debug mode...
 //widget is the base class for all widgets in flutter
-// widget is a class that is used to create a user interface in flutter
+//widget is a class that is used to create a user interface in flutter
 //widget are two types -> 1. stateless widget 2. stateful widget
 /*
 "" -> String
