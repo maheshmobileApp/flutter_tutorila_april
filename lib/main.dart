@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tutorial_april/create/view_model/create_task_view_model.dart';
 import 'package:flutter_tutorial_april/data/repositories/login_repository_impl.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_tutorial_april/ui/signup/view_model/sign_up_view_model.d
 import 'package:provider/provider.dart';
 
 import 'classes/api/provider/counter_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main()async {
   // Entry point of the application
@@ -23,8 +25,16 @@ await FirebasePushNotifications().initNotifications();
   runApp(MyApp()); // pass the widget to the runApp method
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final Locale _locale = const Locale('en');
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -48,6 +58,17 @@ class MyApp extends StatelessWidget {
         // Add other providers here if needed
       ],
       child: MaterialApp(
+        locale: _locale,
+        supportedLocales: const [
+          Locale('en'),
+          Locale('hi'),
+        ],
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          DefaultMaterialLocalizations.delegate,
+          DefaultCupertinoLocalizations.delegate,
+          DefaultWidgetsLocalizations.delegate,
+        ],
         debugShowCheckedModeBanner: false,
         routes: AppRoutes.appRoutes,
         initialRoute: AppRoutesNames.welcome,

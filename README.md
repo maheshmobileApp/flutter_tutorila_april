@@ -125,3 +125,7 @@ testing
                   description: 'description',
                   timings: 'timings',
                   onPressed: () {})
+
+
+## Localization command
+   flutter pub get && flutter gen-l10n

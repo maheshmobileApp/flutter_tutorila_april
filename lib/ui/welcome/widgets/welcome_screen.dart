@@ -5,6 +5,8 @@ import 'package:flutter_tutorial_april/ui/core/ui/widgets/button_widget.dart';
 import 'package:flutter_tutorial_april/ui/core/ui/widgets/slider_widget.dart';
 import 'package:flutter_tutorial_april/utils/constants/local_storate_constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -47,17 +49,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   Widget _buildActionsWidget() {
+
+
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ButtonWidget(
-              title: 'Login',
+              title: AppLocalizations.of(context)!.signIn,
               onPressed: () {
                 Navigator.pushNamed(context, AppRoutesNames.login);
               }),
           ButtonWidget(
-              title: 'Sign Up',
+              title: AppLocalizations.of(context)!.signUp,
               onPressed: () {
                 Navigator.pushNamed(context, AppRoutesNames.signup);
               })
