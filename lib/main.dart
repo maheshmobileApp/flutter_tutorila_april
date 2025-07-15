@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
         ],
         debugShowCheckedModeBanner: false,
         routes: AppRoutes.appRoutes,
-        initialRoute: AppRoutesNames.welcome,
+        initialRoute: AppRoutesNames.location,
       ),
     );
   }
